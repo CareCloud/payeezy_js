@@ -1,0 +1,22 @@
+{
+  "name": "payeezy-js",
+  "version": "1.0.0",
+  "description": "Payeezy bindings for WebBased app",
+  "main": "javascript/payeezy_us_v5.1.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CareCloud/payeezy_js.git"
+  },
+  "author": "Payeezy, CareCloud",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CareCloud/payeezy_js/issues"
+  },
+  "homepage": "https://github.com/CareCloud/payeezy_js#readme"
+}
