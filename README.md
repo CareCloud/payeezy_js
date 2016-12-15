@@ -1,3 +1,7 @@
+# Payeezy packaged with NPM for CareCloud
+
+npm install --save git+ssh://git@github.com/CareCloud/payeezy_js.git
+
 # Payeezy bindings for WebBased app
 
 Refer to the lastest Payeezy JS file for your development and Integration. 
