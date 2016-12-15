@@ -101,3 +101,5 @@ var Payeezy = function() {
         }
     }
 }();
+
+module.exports = Payeezy;
