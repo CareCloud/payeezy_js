@@ -80,7 +80,22 @@ var Payeezy = function() {
                 e(i, s);
                 return false
             }
-            var a = api_endpoint + tokenization_path + "?apikey=" + this.apikey + "&js_security_key=" + this.js_security_key + "&callback=Payeezy.callback&auth=" + this.auth + "&ta_token=" + this.ta_token + "&type=FDToken&credit_card.type=" + r["card_type"] + "&credit_card.cardholder_name=" + r["cardholder_name"] + "&credit_card.card_number=" + r["cc_number"] + "&credit_card.exp_date=" + r["exp_month"] + r["exp_year"] + "&credit_card.cvv=" + r["cvv_code"] + "&currency=" + r["currency"]+ "&billing_address.city=" + r["city"]+ "&billing_address.country=" + r["country"]+ "&billing_address.email=" + r["email"]+ "&billing_address.phone.type=" + r["type"]+ "&billing_address.phone.number=" + r["number"]+ "&billing_address.street=" + r["street"]+ "&billing_address.state_province=" + r["state_province"]+ "&billing_address.zip_postal_code=" + r["zip_postal_code"];
+            var ccreg = {
+                visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
+                mastercard: /^5[1-5][0-9]{14}$/,
+                amex: /^3[47][0-9]{13}$/,
+                diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
+                discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
+                jcb: /^(?:2131|1800|35\d{3})\d{11}$/
+            };
+            for (var type in ccreg) {
+                var cardType = r["cc_number"].replace(/ +/g, "").match(ccreg[type]);
+                if (cardType && cardType.length > 0) {
+                    r["cc_number"] = cardType[0]
+                    r["card_type"] = type
+                }
+            }
+            var a = api_endpoint + tokenization_path + "?apikey=" + this.apikey + "&js_security_key=" + this.js_security_key + "&callback=Payeezy.callback&auth=" + this.auth + "&ta_token=" + this.ta_token + "&type=FDToken&credit_card.type=" + r["card_type"] + "&credit_card.cardholder_name=" + r["cardholder_name"] + "&credit_card.card_number=" + r["cc_number"] + "&credit_card.exp_date=" + r["expiration"].split('/')[0].trim() + r["expiration"].split('/')[1].trim() + "&credit_card.cvv=" + r["cvv_code"] + "&currency=USD" + "&billing_address.city=" + r["city"]+ "&billing_address.country=" + r["country"]+ "&billing_address.email=" + r["email"]+ "&billing_address.phone.type=" + r["type"]+ "&billing_address.phone.number=" + r["number"]+ "&billing_address.street=" + r["street"]+ "&billing_address.state_province=" + r["state_province"]+ "&billing_address.zip_postal_code=" + r["zip_postal_code"];
 			var f = document.createElement("script");
             f.src = a;
             document.getElementsByTagName("head")[0].appendChild(f)
