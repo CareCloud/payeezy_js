@@ -83,14 +83,17 @@ var Payeezy = function() {
             var ccreg = {
                 visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
                 mastercard: /^5[1-5][0-9]{14}$/,
-                amex: /^3[47][0-9]{13}$/,
-                diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
+                american_express: /^3[47][0-9]{13}$/,
+                diners_club: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
                 discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
-                jcb: /^(?:2131|1800|35\d{3})\d{11}$/
+                jcb: /^(?:2131|1800|35\d{3})\d{11}$/,
+                mastercard2: /^2[1-5][0-9]{14}$/,
             };
             for (var type in ccreg) {
                 var cardType = r["cc_number"].replace(/ +/g, "").match(ccreg[type]);
                 if (cardType && cardType.length > 0) {
+                    if (type.includes('_')) type = type.replace('_', ' ');
+                    if (type.includes('2')) type = type.replace('2', '');
                     r["cc_number"] = cardType[0]
                     r["card_type"] = type
                 }
